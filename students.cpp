@@ -5,6 +5,8 @@ using namespace std;
 
 
 class Student {
+    private:
+
     long studentId;
     string name;
     double GPA;
@@ -86,7 +88,7 @@ int main(void) {
                 cout << "No records available" << endl;
             }
             for (int i = 0; i < students.size(); i++) {
-				cout << students.at(i);
+				cout << students.at(i) << endl;
             }
         } else if (input.compare("create") == 0) {
             Student s = createStudent(); 
