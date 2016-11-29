@@ -35,44 +35,11 @@ public:
   }
 };
 
-ostream& operator<<(ostream &strm, Student &s) {
-  return strm << "Student(ID: " << s.getId() << ", Name: "
-	      << s.getName() << ", GPA: " << s.getGPA() << ")";
-}
-
+Student createStudent();
 void saveFile(string filename, vector<Student> students);
 void loadFile(string filename, vector<Student> &students);
-
-
-void printHelpMenu() {
-  cout << "Enter one of the following commands:\n";
-  cout << "    print  - Print all records.\n";
-  cout << "    create - Create a new record.\n";
-  cout << "    delete - Delete a record by ID.\n";
-  cout << "    save   - Save all records to file.\n";
-  cout << "    load   - Load all records from file.\n";
-  cout << "    help   - Reprint this menu.\n";
-  cout << "    exit   - Exit this program.\n\n";
-
-}
-
-Student createStudent() {
-  long studentId;
-  string name;
-  double GPA;
-
-  cout << "\nEnter Student ID: ";
-  cin >> studentId;
-
-  cout << "\nEnter Name: ";
-  cin >> name;
-
-  cout << "\nEnter GPA: ";
-  cin >> GPA;
-    
-  Student s = Student(studentId, name, GPA);
-  return s;
-}
+ostream& operator<<(ostream &strm, Student &s);
+void printHelpMenu();
 
 
 int main(void) {
@@ -82,11 +49,6 @@ int main(void) {
   printHelpMenu();
 
   vector<Student> students;
-
-  //Fill students with dummy data
-  //students.push_back(Student(1, "Name1", 1.0));
-  //students.push_back(Student(2, "Name2", 2.0));
-  //students.push_back(Student(3, "Name3", 3.0));
 
   string input;
 
@@ -132,6 +94,24 @@ int main(void) {
   }
 
   return 0;
+}
+
+Student createStudent() {
+  long studentId;
+  string name;
+  double GPA;
+
+  cout << "\nEnter Student ID: ";
+  cin >> studentId;
+
+  cout << "\nEnter Name: ";
+  cin >> name;
+
+  cout << "\nEnter GPA: ";
+  cin >> GPA;
+    
+  Student s = Student(studentId, name, GPA);
+  return s;
 }
 
 
@@ -197,3 +177,24 @@ void loadFile(string filename, vector<Student> &students){
   //make sure you close the file
   studentFile.close();
 }
+
+ostream& operator<<(ostream &strm, Student &s) {
+  return strm << "Student(ID: " << s.getId() << ", Name: "
+	      << s.getName() << ", GPA: " << s.getGPA() << ")";
+}
+
+
+void printHelpMenu() {
+  cout << "Enter one of the following commands:\n";
+  cout << "    print  - Print all records.\n";
+  cout << "    create - Create a new record.\n";
+  cout << "    delete - Delete a record by ID.\n";
+  cout << "    save   - Save all records to file.\n";
+  cout << "    load   - Load all records from file.\n";
+  cout << "    help   - Reprint this menu.\n";
+  cout << "    exit   - Exit this program.\n\n";
+
+}
+
+
+
