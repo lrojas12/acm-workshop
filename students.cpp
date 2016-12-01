@@ -6,7 +6,7 @@
 using namespace std;
 
 //Define the name of the file that will be used to save and load student data in
-string STUDENT_FILENAME = "students-database.txt";
+const string STUDENT_FILENAME = "students-database.txt";
 
 //Define the Student Class
 class Student {
@@ -173,7 +173,7 @@ void saveFile(string filename, vector<Student> students){
     Student currStudent = students.at(i);
     //Save the current student information to the file in the csv format: id,name,gpa
     cout << "saving student.... " << currStudent << endl;    
-    studentFile << currStudent.getId() << "," << currStudent.getName() << "," << currStudent.getGPA() << endl;
+    studentFile << currStudent.getId() << " " << currStudent.getName() << " " << currStudent.getGPA() << endl;
   }
   cout << "Saved to file " << filename << endl;
   
@@ -188,31 +188,13 @@ void loadFile(string filename, vector<Student> &students){
   studentFile.open(filename);
   cout << "Loading from file: " << filename << endl << endl;;
 
-  //Define a string that will be used a a single line read from the file
-  string line;
-
+  //Define strings to store respective fields of file.
+  string idString, name, GPAString;
+  
   //Read the file line by line
-  while(studentFile >> line){
-
-    //Create a vector of strings to hold the student information
-    vector<string> studentStr;
-
-    //Read the line word by word, in our case should be 3 words per line: id,name,gpa
-    stringstream ss; //http://www.cplusplus.com/reference/sstream/stringstream/
-    ss.str(line);
-    //This will be used as a placeholder for the words being read in
-    string element;
-    //Iterate through every word in the line, using the ',' as a delimiter
-    while(getline(ss, element, ',')){
-      //Add the word read in to a vector of strings
-      studentStr.push_back(element);
-    }
-
-    //Create the student from the strings read in
-    long id = stol(studentStr.at(0));
-    string name = studentStr.at(1);
-    double GPA = stod(studentStr.at(2));
-
+  while(studentFile >> idString >> name >> GPAString){
+    long id = stol(idString); 
+    double GPA = stod(GPAString);
     //Create the student object from the information read above
     Student newStudent = Student(id, name, GPA);
     cout << "Loaded student..." << newStudent << endl;
